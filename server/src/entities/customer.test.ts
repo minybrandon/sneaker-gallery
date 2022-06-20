@@ -19,24 +19,71 @@ describe("Customer", () => {
     customer = new Customer(name, email, phoneNumber);
   });
 
+  const createSneaker = () => {
+    const model = "Sketchers";
+    const size = 8;
+    const sneaker = new Sneaker(model, size);
+    return sneaker;
+  };
+
   it("should create a customer", () => {
+    // precondition
+    // this is declared in the const
+
+    // action
+    // this is in beforeEach
+
+    // postcondition
     expect(customer).toBeDefined();
   });
 
-  it("should require name, email and phone number", () => {
+  it("should get my customer info", () => {
+    // precondition
+    // this is declared in the const
+    // someone with name, email, phone number wants to be my customer
+
+    // action
+    // I creqted a new customer
+
+    // postcondition
     expect(customer.name).toEqual(name);
     expect(customer.phoneNumber).toEqual(phoneNumber);
     expect(customer.email).toEqual(email);
   });
 
-  it("should own at least one sneaker", () => {
-    const model = "Sketchers";
-    const size = 8;
-    const sneaker = new Sneaker(model, size);
+  it("should add a sneaker to customer's gallery", () => {
+    // precondition
+    // customer is created in beforeEach
 
+    // action
+    const sneaker = createSneaker();
     customer.add(sneaker);
 
+    // postcondition
     expect(customer.sneakers).toHaveLength(1);
     expect(customer.sneakers[0]).toEqual(sneaker);
+  });
+
+  it("should not have more than 100 sneakers in gallery", () => {
+    // precondtion
+    // customr with 100 sneaker
+
+    for (let i = 0; i < 100; i++) {
+      const sneaker = createSneaker();
+      customer.add(sneaker);
+    }
+    expect(customer.sneakers).toHaveLength(100);
+
+    // action
+    // adding 101st sneaker
+    const sneaker = createSneaker();
+    customer.add(sneaker);
+
+    // postcondition
+    expect(customer.sneakers.length).toEqual(100);
+  });
+
+  it("requires valid Google mail account", () => {
+    expect(customer.email).toContain("gmail.com");
   });
 });

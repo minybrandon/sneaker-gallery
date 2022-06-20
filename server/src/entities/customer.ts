@@ -2,6 +2,8 @@
 
 import Sneaker from "./sneaker";
 
+const MAX_NUMBER_OF_SNEAKERS = 100;
+
 class Customer {
   name: string;
   email: string;
@@ -16,7 +18,9 @@ class Customer {
   }
 
   add(sneaker: Sneaker) {
-    this.sneakers.push(sneaker);
+    if (this.sneakers.length < MAX_NUMBER_OF_SNEAKERS) {
+      this.sneakers.push(sneaker);
+    }
   }
 }
 
