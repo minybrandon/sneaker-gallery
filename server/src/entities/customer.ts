@@ -10,11 +10,19 @@ class Customer {
   phoneNumber: string;
   sneakers: Sneaker[];
 
+  isValidEmail = (email: string): boolean => {
+    return email.endsWith("@gmail.com");
+  };
+
   constructor(name: string, email: string, phoneNumber: string) {
-    this.name = name;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.sneakers = [];
+    if (this.isValidEmail(email)) {
+      this.name = name;
+      this.email = email;
+      this.phoneNumber = phoneNumber;
+      this.sneakers = [];
+    } else {
+      throw new Error("customer requires valid Google email");
+    }
   }
 
   add(sneaker: Sneaker) {

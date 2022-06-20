@@ -83,7 +83,12 @@ describe("Customer", () => {
     expect(customer.sneakers.length).toEqual(100);
   });
 
-  it("requires valid Google mail account", () => {
-    expect(customer.email).toContain("gmail.com");
+  it("should require valid Google mail account", () => {
+    // precondition
+    const invalidEmail = "sangyum@yahoo.com";
+    //action
+    expect(() => {
+      new Customer(name, invalidEmail, phoneNumber);
+    }).toThrow();
   });
 });
